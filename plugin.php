@@ -87,7 +87,7 @@ final class Plugin
         wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap', false, WP_USER_MNG_VERSION);
         wp_enqueue_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css', false, WP_USER_MNG_VERSION);
 
-        wp_enqueue_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js', false, WP_USER_MNG_VERSION);
+        wp_enqueue_script('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js', false, WP_USER_MNG_VERSION);
 
         do_action('wp-user-management/onload/enqueue_scripts');
     }
@@ -107,8 +107,10 @@ final class Plugin
 
             wp_enqueue_style('font-awesome', 'https://use.fontawesome.com/releases/v5.8.2/css/all.css', false, WP_USER_MNG_VERSION);
             wp_enqueue_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css', false, WP_USER_MNG_VERSION);
+            wp_enqueue_style('wp-user-management-admin-ui', WP_USER_MNG_PLUGIN_PUBLIC . '/assets/css/admin-style.css', false, WP_USER_MNG_VERSION);
 
-            wp_enqueue_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js', false, WP_USER_MNG_VERSION);
+            wp_enqueue_script('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js',[], WP_USER_MNG_VERSION, false);
+            wp_enqueue_script('wp-user-management-admin', WP_USER_MNG_PLUGIN_PUBLIC . '/assets/js/admin-functions.js', ['jquery'], WP_USER_MNG_VERSION, false);
 
         }
     }
@@ -127,15 +129,10 @@ final class Plugin
             esc_html__('WP User Management'),
             'manage_options',
             'wp-user-management-menu',
-            [$this, 'page'],
+            [App\Users\Base::instance(), 'call_data_table_ui'],
             'dashicons-businessperson',
             5
         );
-    }
-
-    public function page()
-    {
-        echo "<h1>Hello World!</h1>";
     }
 
     /**
