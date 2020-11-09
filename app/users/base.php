@@ -13,8 +13,10 @@ class Base{
         
     }
 
-    public function call_data_table_ui()
+    public function call_data_table()
     {
+        $users = Action::instance()->get_all_users();
+        $roles = Action::instance()->get_roles();
         include 'views/user-management-table.php';
     }
 

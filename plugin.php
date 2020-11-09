@@ -111,6 +111,9 @@ final class Plugin
 
             wp_enqueue_script('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js',[], WP_USER_MNG_VERSION, false);
             wp_enqueue_script('wp-user-management-admin', WP_USER_MNG_PLUGIN_PUBLIC . '/assets/js/admin-functions.js', ['jquery'], WP_USER_MNG_VERSION, false);
+            wp_localize_script('wp-user-management-admin', 'ajax', [
+                'ajaxUrl' => admin_url('admin-ajax.php')
+            ]);
 
         }
     }
@@ -129,7 +132,7 @@ final class Plugin
             esc_html__('WP User Management'),
             'manage_options',
             'wp-user-management-menu',
-            [App\Users\Base::instance(), 'call_data_table_ui'],
+            [App\Users\Base::instance(), 'call_data_table'],
             'dashicons-businessperson',
             5
         );
