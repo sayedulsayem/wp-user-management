@@ -4,11 +4,15 @@
     box-shadow: 5px 5px 20px 10px #aaaaaa;
 }
 
-th.user-serial,
-td.user-name,
-td.user-role,
-td.user-action,
+.user-header-wrapper th{
+    width: 25%;
+    text-align: center;
+}
+
+.user-info-wrapper th,
+.user-info-wrapper td,
 .appended-user-info-wrapper th,
 .appended-user-info-wrapper td {
     width: 25%;
+    text-align: center;
 }

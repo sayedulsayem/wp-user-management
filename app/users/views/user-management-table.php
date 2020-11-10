@@ -3,7 +3,6 @@
     <?php
     $users = (is_array($users) ? $users : []);
     $roles = array_keys($roles);
-    //echo "<pre>"; print_r(array_keys($roles)); echo "</pre>";
     ?>
     <div class="user-table-wrapper" data-nonce="<?php echo esc_attr(wp_create_nonce('wp_rest')); ?>" data-roles="<?php echo esc_attr(json_encode($roles)); ?>">
         <table class="table table-hover">
