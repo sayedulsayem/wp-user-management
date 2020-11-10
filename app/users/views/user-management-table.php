@@ -24,7 +24,7 @@
                         <th class="user-serial" scope="row"><?php echo esc_html($key); ?></th>
                         <td class="user-name"><?php echo esc_html($value->user_login); ?></td>
                         <td class="user-role"><?php echo esc_html(is_array($user_meta->roles) ? implode(' | ', $user_meta->roles) : $user_meta->roles); ?></td>
-                        <td>
+                        <td class="user-action">
                             <a class="action-edit btn btn-primary" href="#"><?php esc_html_e('Edit', 'wp-user-management'); ?></a> |
                             <a class="action-delete btn btn-danger" href="#"><?php esc_html_e('Delete', 'wp-user-management'); ?></a>
                         </td>

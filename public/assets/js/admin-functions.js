@@ -6,6 +6,7 @@ jQuery(document).ready(function($) {
     var elEditButton = $('.action-edit');
     var elDeleteButton = $('.action-delete');
     var elUpdateButton = $('.action-update');
+    var elCloseButton = $('.action-close');
 
     var roles = tableWrapper.data('roles');
     var nonce = tableWrapper.data('nonce');
@@ -19,18 +20,22 @@ jQuery(document).ready(function($) {
             var userId = parent.data('id');
             var userName = parent.find('.user-name').text();
             var userRole = parent.find('.user-role').text();
-            var markup = '<tr class="user-info-wrapper" data-id="'+userId+'">';
-                markup += '<th></th><td><div class="form-grou">';
+            var markup = '<tr class="appended-user-info-wrapper" data-id="'+userId+'">';
+                markup += '<th></th><td><div class="form-group">';
                 markup += '<input class="edit-user-name" name="username" type="text" value="'+userName+'">';
                 markup += '</div></td><td><div class="form-group"><select name="user-role" class="edit-user-role form-control">';
             $.each(roles, function(index, value){
                 var selected = ( (value == userRole)? "selected": "" );
                 markup += '<option '+selected+' value="'+value+'">'+value+'</option>';
             });
-                markup += '</select></div></td><td><a class="action-update btn btn-success" href="#">Update</a></td></tr>';
-            parent.after(markup);
+                markup += '</select></div></td><td><a class="action-update btn btn-success" href="#">Update</a> | <a class="action-close btn btn-info" href="#">Close</a></td></tr>';
+            var next = parent.next();
+            if(!next.hasClass('appended-user-info-wrapper')){
+                parent.after(markup);
+            }
 
             updateUi();
+
         })
     });
 
@@ -65,7 +70,7 @@ jQuery(document).ready(function($) {
             $(this).on('click', function(e){
                 e.preventDefault();
                 // console.log('update button clicked');
-                var parent = $(this).parents('.user-info-wrapper');
+                var parent = $(this).parents('.appended-user-info-wrapper');
                 var prev = parent.prev();
                 var userId = parent.data('id');
                 var userName = parent.find('.edit-user-name').val();
@@ -84,9 +89,25 @@ jQuery(document).ready(function($) {
                 });
     
                 deleteRow(parent);
-    
+
             });
         });
+
+        elCloseButton = $('.action-close');
+
+        $.each(elCloseButton, function(index, value){
+
+            $(this).on('click', function(e){
+
+                e.preventDefault();
+
+                var parent = $(this).parents('.appended-user-info-wrapper');
+    
+                deleteRow(parent);
+
+            });
+        });
+
     }
 
 });

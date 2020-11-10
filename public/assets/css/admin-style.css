@@ -3,3 +3,12 @@
     border: 1px solid #BFBFBF;
     box-shadow: 5px 5px 20px 10px #aaaaaa;
 }
+
+th.user-serial,
+td.user-name,
+td.user-role,
+td.user-action,
+.appended-user-info-wrapper th,
+.appended-user-info-wrapper td {
+    width: 25%;
+}
