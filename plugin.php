@@ -87,10 +87,12 @@ final class Plugin
     public function init()
     {
 
+        // create plugin dashboard menu in wp dashboard
         if (current_user_can('manage_options')) {
             add_action('admin_menu', [$this, 'admin_menu']);
         }
 
+        // enqueue js, css in wp admin
         add_action('admin_enqueue_scripts', [$this, 'js_css_admin']);   
 
     }

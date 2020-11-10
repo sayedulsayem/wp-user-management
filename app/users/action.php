@@ -4,15 +4,22 @@ namespace WpUserManagement\App\Users;
 
 defined('ABSPATH') || exit;
 
+/**
+ * action class for completing some tasks
+ *
+ * @author sayedulsayem
+ * @since 1.0.0
+ */
 class Action{
 
     use \WpUserManagement\Traits\Singleton;
 
-    public function init()
-    {
-        
-    }
-
+    /**
+     * get all user from db function
+     *
+     * @return array
+     * @since 1.0.0
+     */
     public function get_all_users()
     {
         $args = [
@@ -30,6 +37,12 @@ class Action{
         return $users;
     }
 
+    /**
+     * get all roles of wp users function
+     *
+     * @return array
+     * @since 1.0.0
+     */
     public function get_roles() {
 	
         global $wp_roles;

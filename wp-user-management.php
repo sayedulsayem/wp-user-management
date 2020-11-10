@@ -24,7 +24,7 @@ require 'plugin.php';
 require_once 'core/global.php';
 
 /**
- * update permalink after register cpt
+ * plugin activation hooks, need to do to something during plugin activation
  */
 register_activation_hook( __FILE__, [ WpUserManagement\Plugin::instance(), 'active_plugin_action'] );
 

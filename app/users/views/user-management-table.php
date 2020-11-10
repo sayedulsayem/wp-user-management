@@ -16,9 +16,7 @@
             </thead>
             <tbody>
                 <?php foreach ($users as $key => $value) : ?>
-                    <?php
-                    $user_meta = get_userdata($value->ID);
-                    ?>
+                    <?php $user_meta = get_userdata($value->ID); ?>
                     <tr class="user-info-wrapper" data-id="<?php echo esc_attr($value->ID); ?>">
                         <th class="user-serial" scope="row"><?php echo esc_html($key); ?></th>
                         <td class="user-name"><?php echo esc_html($value->user_login); ?></td>
