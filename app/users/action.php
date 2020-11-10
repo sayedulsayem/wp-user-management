@@ -24,7 +24,7 @@ class Action{
     {
         $args = [
             'orderby' => 'ID',
-            'order' => 'ASC',
+            'order' => 'DESC',
             'fields' => [
                 'ID',
                 'display_name',
