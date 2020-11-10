@@ -23,6 +23,8 @@ class Action{
     public function get_all_users()
     {
         $args = [
+            'orderby' => 'ID',
+            'order' => 'ASC',
             'fields' => [
                 'ID',
                 'display_name',
