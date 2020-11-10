@@ -11,8 +11,6 @@ jQuery(document).ready(function($) {
     var roles = tableWrapper.data('roles');
     var nonce = tableWrapper.data('nonce');
 
-    // console.log(roles);
-
     $.each(elEditButton, function( index, value ) {
         $(this).on('click', function(e){
             e.preventDefault();
@@ -51,25 +49,34 @@ jQuery(document).ready(function($) {
             };
 
             $.post(ajax.ajaxUrl, data, function(response){
-                console.log(response);
+
                 deleteRow(parent);
+                
             });
         })
     });
 
     function deleteRow(parent){
+
+        var next = parent.next();
+
+        if(next.hasClass('appended-user-info-wrapper')){
+            next.remove();
+        }
+
         parent.remove();
+
     }
 
     function updateUi(){
-        // console.log('update called');
+
         elUpdateButton = $('.action-update');
-        // console.log(elUpdateButton);
+
         $.each(elUpdateButton, function(index, value){
 
             $(this).on('click', function(e){
                 e.preventDefault();
-                // console.log('update button clicked');
+
                 var parent = $(this).parents('.appended-user-info-wrapper');
                 var prev = parent.prev();
                 var userId = parent.data('id');

@@ -50,9 +50,32 @@ final class Plugin
         define('WP_USER_MNG_PLUGIN_PUBLIC_DIR', WP_USER_MNG_PLUGIN_DIR . 'public');
     }
 
+    /**
+     * plugn actication function
+     *
+     * @return void
+     * @since 1.0.0
+     */
     public function active_plugin_action()
     {
+        $this->store_plugin_activation_info();
         $this->flush_rewrites();
+    }
+
+    /**
+     * store some neccessary information during plugin activation
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    public function store_plugin_activation_info()
+    {
+        $info = [
+            'version' => WP_USER_MNG_VERSION,
+            'activation_time' => time(),
+        ];
+
+        update_option('wp_user_management_active_info', $info);
     }
 
     /**
@@ -68,28 +91,8 @@ final class Plugin
             add_action('admin_menu', [$this, 'admin_menu']);
         }
 
-        add_action('admin_enqueue_scripts', [$this, 'js_css_admin']);
-        add_action('wp_enqueue_scripts', [$this, 'js_css_public']);
-        
+        add_action('admin_enqueue_scripts', [$this, 'js_css_admin']);   
 
-    }
-
-    /**
-     * plublic assets load function
-     *
-     * @return void
-     * @since 1.0.0
-     */
-    public function js_css_public()
-    {
-
-        wp_enqueue_style('font-awesome', 'https://use.fontawesome.com/releases/v5.8.2/css/all.css', false, WP_USER_MNG_VERSION);
-        wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap', false, WP_USER_MNG_VERSION);
-        wp_enqueue_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css', false, WP_USER_MNG_VERSION);
-
-        wp_enqueue_script('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js', false, WP_USER_MNG_VERSION);
-
-        do_action('wp-user-management/onload/enqueue_scripts');
     }
 
     /**
