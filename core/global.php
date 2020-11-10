@@ -41,4 +41,31 @@ function wp_user_manager_update_user_info() {
 add_action('wp_ajax_update_user_info', 'wp_user_manager_update_user_info');
 add_action('wp_ajax_nopriv_update_user_info', 'wp_user_manager_update_user_info');
 
+/**
+ * just sample global function
+ *
+ * @return string
+ * @since 1.0.0
+ */
+function wp_user_manager_delete_user_info() {
+	// first check if data is being sent and that it is the data we want   
+   
+	if( isset( $_POST['nonce'] ) ){     
+		$nonce = $_POST['nonce'];
+		if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ){
+			wp_die( 'You are not allowed!');
+        }
+
+        $user_id = isset($_POST['userId'])? $_POST['userId']: '';
+
+        wp_delete_user( $user_id );
+		
+		echo json_encode(['done']);
+		wp_die(); 
+	} 
+}
+
+add_action('wp_ajax_delete_user_info', 'wp_user_manager_delete_user_info');
+add_action('wp_ajax_nopriv_delete_user_info', 'wp_user_manager_delete_user_info');
+
 ?>

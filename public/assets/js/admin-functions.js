@@ -37,7 +37,18 @@ jQuery(document).ready(function($) {
     $.each(elDeleteButton, function( index, value ) {
         $(this).on('click', function(e){
             e.preventDefault();
-            
+            var parent = $(this).parents('.user-info-wrapper');
+            var userId = parent.data('id');
+            var data = {
+                action: 'delete_user_info',
+                nonce: nonce,
+                userId: userId,
+            };
+
+            $.post(ajax.ajaxUrl, data, function(response){
+                console.log(response);
+                deleteRow(parent);
+            });
         })
     });
 
